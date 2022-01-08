@@ -1,4 +1,5 @@
 const Projects = require('../model/Projects')
+const Tasks = require('../model/Tasks')
 
 
 exports.projectsHome = async (req, res)=>{
@@ -56,14 +57,26 @@ exports.projectsByURL = async (req, res, next)=>{
     })
     
 const [projects, project] = await Promise.all([projectsPromise,projectPromise])
+
+    //Get tasks of the actual project 
+    const tasks = await Tasks.findAll({
+        where:{
+            projectId: project.id
+        },
+        include:[
+            {model: Projects}
+        ]
+    })
     
+    console.log(tasks)
     if(!project) return next()
 
     // render view
     res.render('tasks',{
         pageName: 'Project Tasks',
         projects,
-        project
+        project,
+        tasks
     })
 }
 
