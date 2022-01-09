@@ -1,7 +1,7 @@
 import axios from "axios";
 import Swal from 'sweetalert2';
 
-
+import {updateProgress} from '../functions/progress'
 const tasks = document.querySelector('.listado-pendientes');
 
 if( tasks){
@@ -16,8 +16,9 @@ if( tasks){
             axios.patch(url,{taskId})
                  .then(function(response){
                      if(response.status === 200){
-
+                        
                         icon.classList.toggle('completo')
+                        updateProgress();
                      }
                  })
         }
@@ -43,7 +44,7 @@ if( tasks){
                                      //Delete node
                                      taskHTML.parentElement.removeChild(taskHTML);
 
-                                     
+                                     updateProgress();
                                  }
                              })
                     }  
