@@ -1,0 +1,21 @@
+doctype html
+html(lang="en")
+    head
+        include partials/header
+    body.login
+        .contenedor-formulario 
+            h1 Login 
+            
+            if error 
+                p.alerta.error= error
+            form#formulario.caja.caja-login(method="POST" action="/login")
+                .campo 
+                    label(for="email") E-mail: 
+                    input(type="email" name='email' placeholder='Your Email' required value= email)
+                .campo
+                    label(for="password") Password: 
+                    input(type="password" name='password' placeholder='Your Password' required value= password)
+                .campo.enviar 
+                    input.boton(type='submit' value='Login')
+                .campo 
+                    a(href="/create-account") no account?, create one
