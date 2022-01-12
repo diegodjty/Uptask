@@ -3,7 +3,8 @@ const Tasks = require('../model/Tasks')
 
 
 exports.projectsHome = async (req, res)=>{
-    const projects = await Projects.findAll();
+    const userId = res.locals.user.id
+    const projects = await Projects.findAll({where:{userId}});
 
     res.render('index',{
         pageName: 'Projects',
@@ -12,7 +13,8 @@ exports.projectsHome = async (req, res)=>{
 }
 
 exports.projectForm = async(req, res)=>{
-    const projects = await Projects.findAll();
+    const userId = res.locals.user.id
+    const projects = await Projects.findAll({where:{userId}});
     res.render('newProject',{
         pageName: 'New Project',
         projects
@@ -20,7 +22,9 @@ exports.projectForm = async(req, res)=>{
 }
 
 exports.newProject = async (req, res)=>{
-    const projects = await Projects.findAll();
+
+    const userId = res.locals.user.id
+    const projects = await Projects.findAll({where:{userId}});
     // Send to console what user types
     
     // Validate to have something in the input
@@ -41,18 +45,20 @@ exports.newProject = async (req, res)=>{
         })
     }else{
 
-        
-        const project = await Projects.create({name});
+        const userId = res.locals.user.id
+        await Projects.create({name, userId});
         res.redirect('/')
     }
 }
 
 exports.projectsByURL = async (req, res, next)=>{
-    const projectsPromise =  Projects.findAll();
+    const userId = res.locals.user.id
+    const projectsPromise =  Projects.findAll({where:{userId}});
 
     const projectPromise =  Projects.findOne({
         where:{
-            url: req.params.url
+            url: req.params.url,
+            userId
         }
     })
     
@@ -81,11 +87,13 @@ const [projects, project] = await Promise.all([projectsPromise,projectPromise])
 }
 
 exports.editForm = async(req,res)=>{
-    const projectsPromise =  Projects.findAll();
+    const userId = res.locals.user.id
+    const projectsPromise = await Projects.findAll({where:{userId}});
 
     const projectPromise =  Projects.findOne({
         where:{
-            id: req.params.id
+            id: req.params.id,
+            userId
         }
     })
     
@@ -99,7 +107,8 @@ exports.editForm = async(req,res)=>{
 }
 
 exports.updateProject = async (req, res)=>{
-    const projects = await Projects.findAll();
+    const userId = res.locals.user.id
+    const projects = await Projects.findAll({where:{userId}});
     // Send to console what user types
     
     // Validate to have something in the input
