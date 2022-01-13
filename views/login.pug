@@ -8,6 +8,7 @@ html(lang="en")
             
             if error 
                 p.alerta.error= error
+                
             form#formulario.caja.caja-login(method="POST" action="/login")
                 .campo 
                     label(for="email") E-mail: 
@@ -17,5 +18,6 @@ html(lang="en")
                     input(type="password" name='password' placeholder='Your Password' required value= password)
                 .campo.enviar 
                     input.boton(type='submit' value='Login')
-                .campo 
+                .campo.acciones
                     a(href="/create-account") no account?, create one
+                    a(href="/reestablish")  forgot password?

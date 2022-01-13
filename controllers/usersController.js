@@ -36,3 +36,9 @@ exports.createAcct = async (req, res)=>{
         })
     }
 }
+
+exports.reestablishPassword = async (req, res)=>{
+    res.render('reestablish',{
+        pageName: 'Reestablish Password'
+    })
+}

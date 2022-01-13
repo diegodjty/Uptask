@@ -35,7 +35,9 @@ const Users = db.define('users',{
                 msg: 'Password cannot be empty'
             }
         }
-    }
+    },
+    token: Sequalize.STRING,
+    expiration: Sequalize.DATE
 
 },{
     hooks:{

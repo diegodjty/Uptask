@@ -78,6 +78,12 @@ module.exports = function(){
     // Logout
     router.get('/logout',authController.logout)
 
+    // restablish password
+    router.get('/reestablish', usersController.reestablishPassword)
+    router.post('/reestablish', authController.sendToken)
+    router.get('/reestablish/:token', authController.validateToken)
+    router.post('/reestablish/:token', authController.updatePassword)
+
 
     return router
 }
