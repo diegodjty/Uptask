@@ -7,6 +7,7 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const passport = require('./config/passport')
+const sendEmail = require('./handlers/email')
 
 // helpers with some functions
 const helpers = require('./helpers');
@@ -72,3 +73,4 @@ app.use('/',routes())
 
 
 app.listen(3000);
+
