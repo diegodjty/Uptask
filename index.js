@@ -8,6 +8,7 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const passport = require('./config/passport')
 const sendEmail = require('./handlers/email')
+require('dotenv').config({path: 'variables.env'})
 
 // helpers with some functions
 const helpers = require('./helpers');
@@ -71,6 +72,11 @@ app.use((req, res, next)=>{
 
 app.use('/',routes())
 
+// Server and port
+const host = process.env.HOST || '0.0.0.0'
+const port = process.env.PORT || 3000;
 
-app.listen(3000);
+app.listen(port,host,()=>{
+    console.log('server is working')
+});
 
