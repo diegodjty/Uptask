@@ -13,8 +13,8 @@ let transporter = nodemailer.createTransport({
     host: emailConfig.host,
     port: emailConfig.port,
     auth: {
-      user: emailConfig.user, // generated ethereal user
-      pass: emailConfig.pass, // generated ethereal password
+      user: emailConfig.user, 
+      pass: emailConfig.pass, 
     },
 });
 
@@ -22,7 +22,7 @@ let transporter = nodemailer.createTransport({
 
   // Generate HTML
   const generateHTML = (file, options={}) =>{
-      const html = pug.renderFile(`${__dirname}/../views/emails/resetPassword.pug`, options);
+      const html = pug.renderFile(`${__dirname}/../views/emails/${file}.pug`, options);
       return juice(html);
   }
 

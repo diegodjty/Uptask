@@ -36,6 +36,10 @@ const Users = db.define('users',{
             }
         }
     },
+    active: {
+        type: Sequalize.INTEGER,
+        defaultValue: 0
+    },
     token: Sequalize.STRING,
     expiration: Sequalize.DATE
 
